@@ -3,6 +3,7 @@ import { Component } from 'react';
 import { FormContact } from './FormContact/FormContact';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
+import './App.module.css';
 
 export class App extends Component {
   state = {

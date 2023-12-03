@@ -1,10 +1,16 @@
 import React from 'react';
+import css from './Filter.module.css';
 
 export const Filter = ({ filter, changeFilter }) => {
   return (
     <label>
       Find contacts by name
-      <input type="text" name={filter} onChange={changeFilter} />
+      <input
+        className={css.filterInput}
+        type="text"
+        name={filter}
+        onChange={changeFilter}
+      />
     </label>
   );
 };
