@@ -1,18 +1,16 @@
 import React from 'react';
 
-export const ContactList = ({ contacts }) => {
-  const arr = Object.keys({ contacts });
-
+export const ContactList = ({ contacts, deleteContact }) => {
   return (
     <ul>
       <div>
-        {arr.map(({ id, name, number }) => (
+        {contacts.map(({ id, name, number }) => (
           <li key={id}>
             <p>
               {name} : {number}
             </p>
 
-            <button type="button" name="delete">
+            <button type="button" onClick={() => deleteContact(id)}>
               Delete
             </button>
           </li>

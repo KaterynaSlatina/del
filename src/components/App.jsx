@@ -3,7 +3,6 @@ import { Component } from 'react';
 import { FormContact } from './FormContact/FormContact';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
@@ -16,48 +15,51 @@ export class App extends Component {
     filter: '',
   };
 
-  formSubmitHandler = ({ name, number }) => {
-    const contact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-    this.state.contacts.some(
-      i =>
-        i.name.toLowerCase() ===
-          (contact.name.toLowerCase() && i.number === contact.number) ||
-        i.number === contact.number
-    )
-      ? alert(`${name} is already in contacts`)
-      : this.setState(({ contacts }) => ({
-          contacts: [contact, ...contacts],
-        }));
-  };
+  addContact = newContact => {
+    console.log(newContact);
+    const { contacts } = this.state;
 
-  newContact = data => {
-    console.log(data);
-  };
-
-  findContacts = () => {
-    const { filter, contacts } = this.state;
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
+    const isNameExist = contacts.some(
+      contact => contact.name === newContact.name
     );
+
+    if (isNameExist) {
+      alert(`${newContact.name} is already in contacts!`);
+    } else {
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, newContact],
+      }));
+    }
+  };
+
+  changeFilter = e => {
+    this.setState({ filter: e.target.value });
+  };
+
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(({ id }) => id !== contactId),
+    }));
   };
 
   render() {
-    // const { contacts, filter } = this.state;
+    const { filter, contacts } = this.state;
+
+    const findContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+
     return (
       <>
         <section>
           <h2>Phonebook</h2>
-          <FormContact
-            onSubmit={this.formSubmitHandler}
-            newContact={this.newContact}
-          />
+          <FormContact addContact={this.addContact} />
           <h2>Contacts list</h2>
-          <ContactList contacts={this.findContacts()} />
-          <Filter />
+          <ContactList
+            contacts={findContacts}
+            deleteContact={this.deleteContact}
+          />
+          <Filter changeFilter={this.changeFilter} />
         </section>
       </>
     );
