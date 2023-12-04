@@ -7,7 +7,7 @@ export const ContactList = ({ contacts, deleteContact }) => {
       <div className={css.contact}>
         {contacts.map(({ id, name, number }) => (
           <li key={id}>
-            <p>
+            <p className={css.contactNames}>
               {name} : {number}
             </p>
 

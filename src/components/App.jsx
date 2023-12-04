@@ -60,7 +60,7 @@ export class App extends Component {
             contacts={findContacts}
             deleteContact={this.deleteContact}
           />
-          <Filter changeFilter={this.changeFilter} />
+          <Filter changeFilter={this.changeFilter} value={filter} />
         </section>
       </>
     );

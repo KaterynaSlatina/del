@@ -22,3 +22,7 @@ li {
   font-size: 20px;
   border: none;
 }
+
+.contactNames {
+  text-transform: capitalize;
+}
