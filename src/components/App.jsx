@@ -21,7 +21,7 @@ export class App extends Component {
     const { contacts } = this.state;
 
     const isNameExist = contacts.some(
-      contact => contact.name === newContact.name
+      contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
 
     if (isNameExist) {
@@ -60,7 +60,7 @@ export class App extends Component {
             contacts={findContacts}
             deleteContact={this.deleteContact}
           />
-          <Filter changeFilter={this.changeFilter} value={filter} />
+          <Filter changeFilter={this.changeFilter} filter={filter} />
         </section>
       </>
     );

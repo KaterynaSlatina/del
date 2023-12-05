@@ -8,7 +8,7 @@ export const Filter = ({ filter, changeFilter }) => {
       <input
         className={css.filterInput}
         type="text"
-        name={filter}
+        value={filter}
         onChange={changeFilter}
       />
     </label>
