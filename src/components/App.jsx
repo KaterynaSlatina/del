@@ -58,7 +58,7 @@ export class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
-
+  //
   render() {
     const { filter, contacts } = this.state;
 
